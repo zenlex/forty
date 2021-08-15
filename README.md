@@ -1,5 +1,5 @@
 # forty
-40 day streaks of commits starting with 40 JS projects for beginners from the freeCodeCamp blog (https://www.freecodecamp.org/news/javascript-projects-for-beginners/)
+Challenging myself to a 40 day streak of commits starting with 40 JS projects for beginners from the freeCodeCamp blog (https://www.freecodecamp.org/news/javascript-projects-for-beginners/)
 
 In this repository I will attempt to make 40 consecutive days of commits and test my current understanding of JavaScript and git fundamentals. 
 
