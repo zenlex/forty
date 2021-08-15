@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="controls">
+      <button id="simple">Simple</button>
+      <button id="hex">Hex</button>
+    </div>
+    <div class="container">
+      <div id="display">White</div>
+      <button id="change-button">Change Color!</button>
+    </div>
+  </body>
+
+  <script src="colorchanger.js"></script>
+  <script>
+    let simpleButton = document.getElementById("simple");
+    let hexButton = document.getElementById("hex");
+    let changeButton = document.getElementById("change-button");
+    let display = document.getElementById("display");
+    let simple = true;
+    markActive(controls, simpleButton);
+
+    simpleButton.onclick = function (e) {
+      simple = true;
+      markActive(controls, e.target);
+    };
+
+    hexButton.onclick = function (e) {
+      simple = false;
+      markActive(controls, e.target);
+    };
+
+    changeButton.onclick = () => changeColor(document.body, display, simple);
+
+    function markActive(container, target) {
+      Array.from(container.children).forEach(function (child) {
+        child.classList.remove("active");
+      });
+      target.classList.add("active");
+    }
+  </script>
+</html>
