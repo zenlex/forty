@@ -3,9 +3,7 @@ Challenging myself to a 40 day streak of commits starting with 40 JS projects fo
 
 In this repository I will attempt to make 40 consecutive days of commits and test my current understanding of JavaScript and Git fundamentals. 
 
-Working through a list of 40 good JS projects from freeCodeCamp.org.
-
-At end of either 40 days or the 40 projects I will reassess and either extend the project or move on to a similar continuous contribution goal. 
+At end of either 40 days or the 40 projects I will either extend the project or move on to a similar continuous contribution goal. 
 
 All projects in vanilla JS or React per project spec. 
 
