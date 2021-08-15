@@ -13,6 +13,6 @@ I will attempt to accomplish each spec without using the tutorial or sample code
 
 One project per branch with sub branches as needed during development.
 
-'main' is for Readme and other global repo documentation. 
+'main' is for Readme and other global repo documentation. Individual project branches will be pulled to main when functional. 
 
 
