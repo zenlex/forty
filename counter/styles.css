@@ -1,0 +1,11 @@
+#counter p {
+     font-size:xx-large;
+}
+
+.negnum {
+    color:red;
+}
+
+.posnum {
+    color:green;
+}

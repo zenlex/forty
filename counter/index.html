@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1>Counter</h1>
+        <div id='container'><p id='counter'>##</p></div>
+        <div id='controls'>
+            <button id='dec'>Decrease</button>
+            <button id='reset'>Reset</button>
+            <button id='inc'>Increase</button>
+        </div>
+    </body>
+    <script src = "counterhelpers.js"></script>
+    <script>
+        let count = 0;
+        controls.addEventListener('click', onControlClick);
+
+        function onControlClick(event){
+            switch(event.target.id){
+                case 'dec': 
+                    updateCounter(-1, counter);
+                    return false;
+                case 'inc':
+                    updateCounter(1, counter);
+                    return false;
+                case 'reset':
+                    updateCounter(0, counter);
+                    return false;
+                default:
+                    return false;
+            }
+        }
+
+        function updateCounter(action, elem){
+            
+        }
+    </script>
+</html>
