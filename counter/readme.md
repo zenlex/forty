@@ -1,0 +1,1 @@
+A basic vanilla JS counter. Used event propagation and switch to minimize handlers. 
