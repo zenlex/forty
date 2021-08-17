@@ -1,5 +1,20 @@
-#counter p {
-     font-size:xx-large;
+* {
+    /*border: 1px lightgray dashed;*/
+    padding:0;
+    margin:0;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+button {
+    width:100px;
+    height:40px;
+    border-radius:8px;
+    font-size:large;
+    margin:5px;
+}
+#counter{
+    
+     font-size: 7em;
 }
 
 .negnum {
@@ -8,4 +23,12 @@
 
 .posnum {
     color:green;
+}
+
+#container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }

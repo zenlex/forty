@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <link rel='stylesheet' href='styles.css' />
     </head>
     <body>
-        <h1>Counter</h1>
-        <div id='container'><p id='counter'>##</p></div>
-        <div id='controls'>
-            <button id='dec'>Decrease</button>
-            <button id='reset'>Reset</button>
-            <button id='inc'>Increase</button>
+        <div id='container'>
+            <h1>Counter</h1>
+            <p id='counter'></p>
+            <div id='controls'>
+                <button id='dec'>Decrease</button>
+                <button id='reset'>Reset</button>
+                <button id='inc'>Increase</button>
+            </div>
         </div>
     </body>
     <script src = "counterhelpers.js"></script>
@@ -33,8 +35,23 @@
             }
         }
 
-        function updateCounter(action, elem){
-            
+        function updateCounter(change, elem){
+            if(change){
+                count += change;
+            } else {
+                count = 0;
+            }
+            elem.classList.remove('posnum', 'negnum');
+            if (count > 0){
+                elem.classList.add('posnum');
+            }
+            if (count < 0){
+                elem.classList.add('negnum')
+            }
+            elem.classList.add
+            elem.innerHTML = count;
         }
+
+        updateCounter(0, counter);
     </script>
 </html>
