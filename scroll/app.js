@@ -39,5 +39,32 @@ window.addEventListener("scroll", function () {
   }
 });
 // *********** precise smooth scroll **************
-// video bookmark : https://youtu.be/3PHXvlpOkf4?t=15353
+const scrollLinks = document.querySelectorAll(".scroll-link");
+
+scrollLinks.forEach(function (link) {
+  link.addEventListener("click", function (event) {
+    event.preventDefault();
+    const dest = document.querySelector(
+      event.currentTarget.getAttribute("href")
+    );
+    // calculate the heights
+    const navHeight = nav.getBoundingClientRect().height;
+    const containerHeight = linksCont.getBoundingClientRect().height;
+    const fixedNav = nav.classList.contains("fixed-nav");
+    let position = dest.offsetTop - navHeight;
+
+    if (!fixedNav) {
+      //check if scroll already past initial nav height
+      position = position - navHeight;
+    }
+
+    if (navHeight > 82) {
+      //compensate for nav menu on mobile
+      position = position + containerHeight;
+    }
+
+    window.scrollTo({ left: 0, top: position });
+    linksCont.style.height = 0;
+  });
+});
 // *********** close links **************
