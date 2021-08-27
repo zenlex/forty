@@ -1,0 +1,3 @@
+add and edit function seems almost ok. Delete item not working correctly and after delete or clear list, add item no longer works correctly. Nodes are added but not displayed. Thinking issue is with container but....
+
+clean up code formatting and look at add item function with 3 cases of if/else - commenting out the hide container from delete function didn't seem to fix the bug. Clean up the formatting and then trace the problem. 
