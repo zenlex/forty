@@ -19,12 +19,16 @@ const strictButton = document.querySelector("#strict");
 const onButton = document.querySelector("#on");
 const startButton = document.querySelector("#start");
 
-strictButton.addEventListener("change", (e) => {
-  strict = strictButton.checked;
+strictButton.addEventListener("click", (event) => {
+  if (strictButton.checked == true) {
+    strict = true;
+  } else {
+    strict = false;
+  }
 });
 
-onButton.addEventListener("click", (e) => {
-  if (onButton.checked) {
+onButton.addEventListener("click", (event) => {
+  if (onButton.checked == true) {
     on = true;
     turnCounter.innerHTML = "-";
   } else {
@@ -35,7 +39,7 @@ onButton.addEventListener("click", (e) => {
   }
 });
 
-startButton.addEventListener("click", (e) => {
+startButton.addEventListener("click", (event) => {
   if (on || win) {
     play();
   }
@@ -50,7 +54,7 @@ function play() {
   turn = 1;
   turnCounter.innerHTML = 1;
   good = true;
-  for (let i = 0; i < 20; i++) {
+  for (var i = 0; i < 20; i++) {
     order.push(Math.floor(Math.random() * 4) + 1);
   }
   compTurn = true;
@@ -122,6 +126,7 @@ function clearColor() {
   bottomLeft.style.backgroundColor = "goldenrod";
   bottomRight.style.backgroundColor = "darkblue";
 }
+
 function flashColor() {
   topLeft.style.backgroundColor = "lightgreen";
   topRight.style.backgroundColor = "tomato";
@@ -129,7 +134,7 @@ function flashColor() {
   bottomRight.style.backgroundColor = "lightskyblue";
 }
 
-topLeft.addEventListener("click", (e) => {
+topLeft.addEventListener("click", (event) => {
   if (on) {
     playerOrder.push(1);
     check();
@@ -141,7 +146,8 @@ topLeft.addEventListener("click", (e) => {
     }
   }
 });
-topRight.addEventListener("click", (e) => {
+
+topRight.addEventListener("click", (event) => {
   if (on) {
     playerOrder.push(2);
     check();
@@ -153,7 +159,8 @@ topRight.addEventListener("click", (e) => {
     }
   }
 });
-bottomLeft.addEventListener("click", (e) => {
+
+bottomLeft.addEventListener("click", (event) => {
   if (on) {
     playerOrder.push(3);
     check();
@@ -165,7 +172,8 @@ bottomLeft.addEventListener("click", (e) => {
     }
   }
 });
-bottomRight.addEventListener("click", (e) => {
+
+bottomRight.addEventListener("click", (event) => {
   if (on) {
     playerOrder.push(4);
     check();
@@ -179,15 +187,13 @@ bottomRight.addEventListener("click", (e) => {
 });
 
 function check() {
-  //check most recent add for accuracy
-  if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1]) {
+  if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1])
     good = false;
-  }
-  //got 'em all
-  if (playerOrder.length == 20 && good) {
+
+  if (playerOrder.length == 3 && good) {
     winGame();
   }
-  //wasn't right
+
   if (good == false) {
     flashColor();
     turnCounter.innerHTML = "NO!";
@@ -196,7 +202,6 @@ function check() {
       clearColor();
 
       if (strict) {
-        //restart game @ 1
         play();
       } else {
         compTurn = true;
@@ -206,6 +211,7 @@ function check() {
         intervalId = setInterval(gameTurn, 800);
       }
     }, 800);
+
     noise = false;
   }
 
