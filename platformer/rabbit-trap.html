@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no"
@@ -17,12 +17,12 @@
       <div id="menu-list">
         <br />
         <a href="rabbit-trap.html?01">part1</a>
-        <a href="rabbit-trap.html?01">part2</a>
-        <a href="rabbit-trap.html?01">part3</a>
-        <a href="rabbit-trap.html?01">part4</a>
-        <a href="rabbit-trap.html?01">part5</a>
-        <a href="rabbit-trap.html?01">part6</a>
-        <a href="rabbit-trap.html?01">part7</a>
+        <a href="rabbit-trap.html?02">part2</a>
+        <a href="rabbit-trap.html?03">part3</a>
+        <a href="rabbit-trap.html?04">part4</a>
+        <a href="rabbit-trap.html?05">part5</a>
+        <a href="rabbit-trap.html?06">part6</a>
+        <a href="rabbit-trap.html?07">part7</a>
       </div>
     </div>
 
@@ -97,9 +97,9 @@
 
       for (let index = 0; index < parts[part].length; index++) {
         let script = document.createElement("script");
-        script.setAttibute("type", "text/javascipt");
+        script.setAttribute("type", "text/javascript");
         script.setAttribute("src", parts[part][index]);
-        document.head.append(script);
+        document.head.appendChild(script);
       }
 
       let menu = document.getElementById("menu");
