@@ -1,7 +1,6 @@
 // Transcribed from Frank Poth Copyright 2/28/2018
 
 const Controller = function () {
-  this.down = new Controller.ButtonInput();
   this.left = new Controller.ButtonInput();
   this.right = new Controller.ButtonInput();
   this.up = new Controller.ButtonInput();
@@ -19,8 +18,6 @@ const Controller = function () {
       case 39:
         this.right.getInput(down);
         break;
-      case 40:
-        this.down.getInput(down);
     }
   };
 };
