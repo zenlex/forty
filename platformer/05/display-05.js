@@ -1,5 +1,3 @@
-//PICK UP HERE - something is screwy in what's rendering out. pixel math is off somewhere. Otherwise it functions....
-
 //Transcribed from Frank Poth (copyright 02/28/2018)
 
 /* This Display class contains the screen resize event handler and also handles
