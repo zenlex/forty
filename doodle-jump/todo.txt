@@ -1,0 +1,9 @@
+Notes/Thoughts for improvement:
+
+Turn doodler into class
+Button for start game
+replace all hard coded values with object properties (world object?)
+separate components into an MVC structure? (If so, refactor out game engine also)
+styling
+Move doodler and platform to consistent coordinate space (relate everything to tops or to bottoms)
+Refactor out collision detection
