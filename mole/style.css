@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*variables*/
+:root {
+  --square-height: 200px;
+  --square-width: 200px;
+}
+
+.grid {
+  margin: 0 auto;
+  display: flex;
+  width: calc(var(--square-height) * 3);
+  flex-wrap: wrap;
+}
+
+.square {
+  width: var(--square-width);
+  height: var(--square-height);
+  border: solid black;
+}
+
+#title {
+  font-size: 30px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h2 {
+  font-size: 20px;
+  font-family: sans-serif;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#time {
+  color: green;
+  font-size: 40px;
+  vertical-align: middle;
+}
+
+#score {
+  color: goldenrod;
+  font-size: 40px;
+  vertical-align: middle;
+}
+
+.mole {
+  background-image: url("mole.png");
+  background-size: cover;
+}
+
+.whacked {
+  background-color: green;
+}
+
+.over {
+  background-color: red;
+}
