@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* VARIABLES */
+:root {
+  --squaresize: 20px;
+}
+
+.section-center {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  padding: 5px;
+  align-items: center;
+}
+
+.grid {
+  box-sizing: content-box;
+  width: calc(var(--squaresize) * 10);
+  display: flex;
+  flex-wrap: wrap;
+  border: 2px solid black;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+}
+
+.grid div {
+  width: var(--squaresize);
+  height: var(--squaresize);
+  border: 1px dashed lightblue;
+}
+
+#start {
+  margin: 5px;
+}
+
+.snake {
+  background-color: blue;
+}
+
+.apple {
+  background-color: red;
+}
