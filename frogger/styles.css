@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --sqsize: 30px;
+  --cols: 12;
+}
+
+.grid {
+  box-sizing: content-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(var(--sqsize) * var(--cols));
+  border: 1px solid;
+}
+
+.gridspace {
+  width: var(--sqsize);
+  height: var(--sqsize);
+}
+
+.startblock {
+  background-color: blue;
+}
+
+.endblock {
+  background-color: red;
+}
+
+.frog {
+  background-color: green !important;
+}
+
+.river {
+  background-color: lightskyblue;
+}
+
+.bridge {
+  background-color: darkslategrey;
+}
+
+.road {
+  background-color: grey;
+}
