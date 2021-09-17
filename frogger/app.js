@@ -1,17 +1,26 @@
+const COLS = 15;
+const ROWS = 15;
+let logs = [];
+let cars = [];
+let logSize = 5;
+let logGap = 2;
+let carSize = 1;
+let carGap = 2;
+
+let root = document.documentElement;
+root.style.setProperty("--cols", COLS);
+
 document.addEventListener("DOMContentLoaded", () => {
   //// SELECTORS ////
+
   const grid = document.querySelector(".grid");
   const result = document.querySelector("#result");
   const timeLeft = document.querySelector("#time-left");
   const startBtn = document.querySelector("#start-btn");
+
   //// INITIALIZATION ////
 
   //draw and store grid squares and update CSS variables
-  const COLS = 22;
-  const ROWS = 14;
-
-  let root = document.documentElement;
-  root.style.setProperty("--cols", COLS);
 
   for (let i = 0; i < COLS * ROWS; i++) {
     let square = document.createElement("div");
@@ -29,6 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
   squares[endblock].classList.add("endblock");
 
   //draw river, road, bridge
+
+  const obsAreas = drawObsAreas();
+
+  //initialize frog
+  let currIndex = startblock;
+  let direction = 0;
+
+  drawFrog();
+
+  //// FUNCTIONS ////
   function drawObsAreas() {
     let rowsEven = ROWS % 2 == 0;
 
@@ -68,39 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  const obsAreas = drawObsAreas();
-
-  function movecLogs(obsAreas) {
-    //generate logs
-    /**
-     * create array of starting logs based on obj areas then use the 4 class loop method she uses in tutorial
-     */
-  }
-
-  function moveCars(obsAreas) {
-    //generate cars
-    /**
-     * create array of starting cars based on obj areas then use the 4 class loop method she uses in tutorial
-     */
-  }
-
-  //initialize frog
-  let currIndex = startblock;
-  let direction = 0;
-
-  drawFrog();
-
-  //// FUNCTIONS ////
-  function drawFrog() {
-    squares[currIndex].classList.add("frog");
-  }
-
-  function moveFrog() {
-    squares[currIndex].classList.remove("frog");
-    currIndex += direction;
-    squares[currIndex].classList.add("frog");
-  }
-
   function control(e) {
     switch (e.key) {
       case "ArrowLeft":
@@ -126,6 +112,172 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function makeLogs() {
+    //generate logs
+    let numRows = Math.round((obsAreas.riverEnd - obsAreas.riverStart) / COLS);
+    //loop through a row at a time alternating direction
+    for (
+      let i = 0, rowStart = obsAreas.riverStart;
+      i < numRows;
+      i++, rowStart += COLS
+    ) {
+      let startGap = i > 0 && i % 2 != 0; //start odd rows with a gap
+      makeLogRow(rowStart, startGap);
+    }
+
+    //draw logs of logsize length with gaps until hit edge of grid
+    function makeLogRow(start, isGap = false) {
+      let currLog = [];
+
+      for (let i = start; i < start + COLS; i++) {
+        if (isGap) {
+          //skip gap
+          i += logGap;
+          if (i >= start + COLS) return;
+          isGap = false;
+        }
+        currLog.push(i);
+        if (currLog.length === logSize) {
+          logs.push(currLog);
+          currLog = [];
+          isGap = true;
+          counter = 0;
+        }
+      }
+    }
+
+    drawLogs();
+    console.log(`logs = ${logs}`);
+  }
+
+  function makeCars() {
+    //generate cars
+    let numRows = Math.round((obsAreas.roadEnd - obsAreas.roadStart) / COLS);
+    //loop through a row at a time alternating direction
+    for (
+      let i = 0, rowStart = obsAreas.roadStart;
+      i < numRows;
+      i++, rowStart += COLS
+    ) {
+      let startGap = i > 0 && i % 2 != 0; //start odd rows with a gap
+      makeCarRow(rowStart, startGap);
+    }
+
+    //draw logs of logsize length with gaps until hit edge of grid
+    function makeCarRow(start, isGap = false) {
+      let currCar = [];
+
+      for (let i = start; i < start + COLS; i++) {
+        if (isGap) {
+          //skip gap
+          i += carGap;
+          if (i >= start + COLS) return;
+          isGap = false;
+        }
+        currCar.push(i);
+        if (currCar.length === carSize) {
+          cars.push(currCar);
+          currCar = [];
+          isGap = true;
+          counter = 0;
+        }
+      }
+    }
+    drawCars();
+  }
+
+  function drawLogs() {
+    for (let i = obsAreas.riverStart; i <= obsAreas.riverEnd; i++) {
+      squares[i].classList.remove("log");
+    }
+    for (let log of logs) {
+      for (let index of log) {
+        squares[index].classList.add("log");
+      }
+    }
+  }
+
+  function drawCars() {
+    for (let car of cars) {
+      for (let index of car) {
+        squares[index].classList.add("car");
+      }
+    }
+  }
+
+  function drawFrog() {
+    squares[currIndex].classList.add("frog");
+  }
+
+  function moveLogs() {
+    let currIndex = obsAreas.riverStart;
+    let currRow = 0;
+    let evenRow = true;
+    for (let i = currIndex; i <= obsAreas.riverEnd; ) {
+      //if even row (incl 0) move all car divs right
+      if (evenRow) {
+        moveLogsLeft(currIndex);
+        currIndex += COLS;
+        currRow = Math.floor(currIndex / COLS);
+        evenRow = currRow == 0 || currRow % 2 == 0 ? true : false;
+      } else {
+        moveLogsRight(currIndex);
+        currIndex += COLS;
+        if (currIndex > obsAreas.riverEnd) return;
+        evenRow = currRow == 0 || currRow % 2 == 0 ? true : false;
+      }
+    }
+
+    drawLogs();
+
+    function moveLogsLeft(rowStart) {
+      let logRow = logs.filter((log) => log[log.length - 1] <= rowStart + COLS);
+      for (let log of logRow) {
+        for (let i = 0; i < log.length; i++) {
+          log[i]--;
+          if (log[i] < rowStart) {
+            log.splice(i, 1);
+            if (logRow[logRow.length - 1].length < logSize) {
+              logRow[logRow.length - 1].push(rowStart + COLS - 1);
+            } else {
+              logRow.push([rowStart + COLS - 1]);
+            }
+          }
+        }
+      }
+    }
+    function moveLogsRight(rowStart) {
+      let logRow = logs.filter((log) => log[log.length - 1] <= rowStart + COLS);
+      for (let log of logRow) {
+        for (let i = 0; i < log.length; i++) {
+          log[i]++;
+          if (log[i] > rowStart + COLS - 1) {
+            log.splice(i, 1);
+            if (logRow[0].length < logSize) {
+              logRow[0].unshift(rowStart);
+            } else {
+              logRow.unshift([rowStart]);
+            }
+          }
+        }
+      }
+    }
+
+    //if odd row move all car divs left
+  }
+
+  function moveFrog() {
+    squares[currIndex].classList.remove("frog");
+    currIndex += direction;
+    drawFrog();
+  }
   //// EVENT LISTENERS ////
   document.addEventListener("keydown", control);
+
+  //// RUN GAME ////
+  makeLogs();
+  makeCars();
+
+  //let logTimer = setInterval(moveLogs, 500);
+  //// END GAME ////
 }); //end DOM Content Loaded
