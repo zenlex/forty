@@ -1,4 +1,4 @@
-import React, { useState, useContext, useReducer, useEffect } from "react";
+import React, { useContext, useReducer, useEffect } from "react";
 import cartItems from "./data";
 import reducer from "./reducer";
 // ATTENTION!!!!!!!!!!
@@ -24,26 +24,23 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "REMOVE", payload: id });
   };
 
-  const incrItem = (id) => {
-    dispatch({ type: "INCREMENT", payload: id });
-  };
-
-  const decrItem = (id) => {
-    dispatch({ type: "DECREMENT", payload: id });
-  };
-
-  const fetchData = async () => {
-    dispatch({ type: "LOADING" });
-    const response = await fetch(url);
-    const cart = await response.json();
-    dispatch({ type: "DISPLAY_ITEMS", payload: cart });
+  const changeQty = (id, change) => {
+    dispatch({ type: "CHANGE_QTY", payload: id, change: change });
   };
 
   useEffect(() => {
     dispatch({ type: "UPDATE_TOTALS" });
   }, [state.cart]);
 
-  useEffect(() => fetchData(), []);
+  useEffect(() => {
+    async function fetchData() {
+      dispatch({ type: "LOADING" });
+      const response = await fetch(url);
+      const cart = await response.json();
+      dispatch({ type: "DISPLAY_ITEMS", payload: cart });
+    }
+    fetchData();
+  }, []);
 
   return (
     <AppContext.Provider
@@ -51,8 +48,7 @@ const AppProvider = ({ children }) => {
         ...state,
         clearCart,
         remove,
-        incrItem,
-        decrItem,
+        changeQty,
       }}
     >
       {children}

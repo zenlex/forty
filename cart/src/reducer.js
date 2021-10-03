@@ -7,26 +7,13 @@ const reducer = (state, action) => {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
-    case "INCREMENT": {
-      let tempCart = [];
-      tempCart = state.cart.map((item) => {
-        if (item.id === action.payload) {
-          return { ...item, amount: item.amount + 1 };
-        }
-        return item;
-      });
-      return {
-        ...state,
-        cart: tempCart,
-      };
-    }
 
-    case "DECREMENT": {
+    case "CHANGE_QTY": {
       let tempCart = [];
       tempCart = state.cart
         .map((item) => {
           if (item.id === action.payload) {
-            return { ...item, amount: item.amount - 1 };
+            return { ...item, amount: item.amount + action.change };
           }
           return item;
         })
@@ -58,7 +45,7 @@ const reducer = (state, action) => {
     case "DISPLAY_ITEMS":
       return { ...state, cart: action.payload, loading: false };
     default:
-      return state;
+      throw new Error("no matching action type");
   }
 };
 
