@@ -51,6 +51,12 @@ const reducer = (state, action) => {
       total = Number.parseFloat(total.toFixed(2));
       return { ...state, total, amount };
     }
+
+    case "LOADING":
+      return { ...state, loading: true };
+
+    case "DISPLAY_ITEMS":
+      return { ...state, cart: action.payload, loading: false };
     default:
       return state;
   }
